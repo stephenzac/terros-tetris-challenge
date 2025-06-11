@@ -16,7 +16,7 @@ export default function Game() {
 
   const boardRef = useRef<HTMLDivElement>(null);
 
-  // Focus the game board by default
+  // Focus the game board by default for game controls to apply
   useEffect(() => {
     boardRef.current?.focus();
   }, []);
