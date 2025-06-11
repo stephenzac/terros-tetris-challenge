@@ -1,12 +1,18 @@
 'use client';
 
-import { createGameBoard, updateGameBoard } from '@/utils/game';
-import { CurrentPiece, GameBoard } from '@/types/types';
+import {
+  createGameBoard,
+  generateRandomPiece,
+  updateGameBoard,
+} from '@/utils/game';
+import { GamePiece, GameBoard } from '@/types/types';
 import { useEffect, useRef, useState } from 'react';
 
 export default function Game() {
   const [gameBoard, setGameBoard] = useState<GameBoard>(createGameBoard());
-  const [currentPiece, setCurrentPiece] = useState<CurrentPiece>([]);
+  const [currentPiece, setCurrentPiece] = useState<GamePiece>(
+    generateRandomPiece()
+  );
 
   const boardRef = useRef<HTMLDivElement>(null);
 
@@ -31,12 +37,18 @@ export default function Game() {
 
     switch (event.key) {
       case 'ArrowUp':
+        // Flip current piece
         break;
       case 'ArrowDown':
+        // Apply a game tick upon arrow down
+        const newGameBoard = updateGameBoard(gameBoard);
+        setGameBoard(newGameBoard);
         break;
       case 'ArrowLeft':
+        // Move piece left by 1 space
         break;
       case 'ArrowRight':
+        // Move piece right by 1 space
         break;
     }
   };
